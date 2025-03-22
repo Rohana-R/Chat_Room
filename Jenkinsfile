@@ -14,7 +14,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage ('build') {
+        stage ('package') {
             steps {
                 sh 'mvn package'
             }
@@ -23,10 +23,10 @@ pipeline {
     post {
         always {
             emailext (
-                to: 'rohana.r.90@gmail.com'
+                to: 'rohana.r.90@gmail.com',
                 subject: 'Build ${BUILD_NUMBER} - ${BUILD_STATUS}',
                 body: 'The build has completed with status: ${BUILD_STATUS}',
-                attacheLog: true
+                attachLog: true
             )
         }
     }
