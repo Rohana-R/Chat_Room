@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('SCM checkout') {
             steps {
-                git 'https://github.com/Rohana-R/Chat_Room.git'
+                git 'git@github.com:Rohana-R/Chat_Room.git'
             }
         }
         stage ('compile') {
