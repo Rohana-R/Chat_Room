@@ -1,24 +1,32 @@
 pipeline {
-    agent any
+    agent { label 'ubuntu.slave'}
     tools {
         maven 'Maven'
     }
     stages {
-        stage ('SCM checkout') {
+        stage('SCM checkout)' {
             steps {
-                git credentialsId: 'Rohana-R/multi-ssh', url: 'git@github.com:Rohana-R/Chat_Room.git'
+                git 'https://github.com/Rohana-R/Chat_Room.git'
             }
         }
-        stage ('compile') {
+        stage('compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-        stage ('package') {
+        stage('build') {
             steps {
-                sh 'mvn package'
+               sh 'mvn package'
             }
         }
-    
-    }
+  }
+
+     post {
+            always {
+                 to: 'rohana.r.90@gmail.com'
+                 subject: 'Build ${BUILD_NUMBER} - ${BUILD_STATUS}',
+                 body: 'The build has completed with status: ${BUILD_STATUS}',
+                 attachLog: true
+             }   
+        }
 }
