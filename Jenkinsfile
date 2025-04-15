@@ -17,7 +17,7 @@ pipeline {
         stage('docker push') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-cred') {
+                    withDockerRegistry(credentialsId: 'docker-credentials') {
                     sh 'docker push rohana1234/chat-room'
                     }
                 }
