@@ -1,32 +1,34 @@
 pipeline {
-    agent { label 'ubuntu.slave'}
-    tools {
-        maven 'Maven'
-    }
+    agent any
+
     stages {
-        stage('SCM checkout)' {
+        stage('git checkout') {
             steps {
                 git 'https://github.com/Rohana-R/Chat_Room.git'
             }
         }
-        stage('compile') {
+        stage('docker build') {
             steps {
-                sh 'mvn compile'
+                script {
+                    sh 'docker build -t rohana1234/chat-room .'
+                }
             }
         }
-        stage('build') {
+        stage('docker push') {
             steps {
-               sh 'mvn package'
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                    sh 'docker push rohana1234/chat-room'
+                    }
+                }
             }
         }
-  }
-
-     post {
-            always {
-                 to: 'rohana.r.90@gmail.com'
-                 subject: 'Build ${BUILD_NUMBER} - ${BUILD_STATUS}',
-                 body: 'The build has completed with status: ${BUILD_STATUS}',
-                 attachLog: true
-             }   
+        stage('docker container') {
+            steps {
+                script {
+                    sh 'docker run -itd --name chat-cont -p 8081:8080 rohana1234/chat-room'
+                }
+            }
         }
+    }
 }
