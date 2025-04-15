@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('git checkout') {
+        stage('git scm') {
             steps {
                 git 'https://github.com/Rohana-R/Chat_Room.git'
             }
