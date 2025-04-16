@@ -13,8 +13,8 @@ pipeline {
         stage('code analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat-Room \
-                    -Dsonar-projectKey=Chat_Room
+                    sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat-Room \
+                    -Dsonar-projectKey=Chat_Room'
                     }
            }
           } 
