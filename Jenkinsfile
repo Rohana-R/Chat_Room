@@ -13,7 +13,7 @@ pipeline {
         stage('code analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat-Room \
+                    sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat_Room \
                     -Dsonar.java.binaries=. \
                     -Dsonar-projectKey=Chat_Room'
                     }
@@ -23,13 +23,6 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t chat-room .'
-                }
-            }
-        }
-        stage('docker push') {
-            steps {
-                script {
-                    sh 'docker push chat-room'
                 }
             }
         }
