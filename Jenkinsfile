@@ -7,10 +7,18 @@ pipeline {
                 git 'https://github.com/Rohana-R/Chat_Room.git'
             }
         }
+        stage('code analysis') {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat-Room \
+                    -Dsonar-projectKey=Chat_Room
+                    }
+           }
+          } 
         stage('docker build') {
             steps {
                 script {
-                    sh 'docker build -t rohana1234/chat-room .'
+                    sh 'docker build -t chat-room .'
                 }
             }
         }
@@ -18,7 +26,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials') {
-                    sh 'docker push rohana1234/chat-room'
+                    sh 'docker push chat-room'
                     }
                 }
             }
