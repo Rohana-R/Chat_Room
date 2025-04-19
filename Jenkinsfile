@@ -18,7 +18,7 @@ pipeline {
                     -Dsonar-projectKey=Chat_Room'''
                    }
             }
-          } 
+        } 
         stage('docker build') {
             steps {
                 script {
