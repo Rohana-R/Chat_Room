@@ -17,7 +17,7 @@ pipeline {
         stage('dcoker container') {
             steps {
                 script {
-                    sh 'docker run -itd --name chat-cont -p 8081:8080 chatroom'
+                    sh 'docker run -itd --name chat1-cont -p 8084:8080 chatroom'
                 }
             }
         }
