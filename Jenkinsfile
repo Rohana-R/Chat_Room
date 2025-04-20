@@ -12,7 +12,7 @@ pipeline {
         }
         stage('code analysis') {
             steps {
-                withSonarQubeEnv('sonar-server') {
+                withSonarQubeEnv('sonar-token') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat_Room \
                     -Dsonar.java.binaries=. \
                     -Dsonar-projectKey=Chat_Room'''
