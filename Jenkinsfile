@@ -38,7 +38,7 @@ pipeline {
         stage('docker container') {
             steps {
                 script {
-                    sh 'docker run -itd --name chat-cont -p 8084:8080 rohana1234/chat-room'
+                    sh 'docker run -itd --name chat1-cont -p 8081:8080 rohana1234/chat-room'
                 }
             }
         }
